@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+{% load static %}
+
+{%block content%}
+
+
+
+<div class="container">
+	<div class="row">
+		<ul class="collapsible" data-collapsible="accordion">
+			<li>
+			    <div id="products_id" class="collapsible-header"><i class="material-icons">view_list</i>Products List</div>
+			    <div class="collapsible-body">
+				        <div class="card">
+				            <div class="card-content">          
+									<div id="products_list_tbl">
+										<form id="products" method="POST" enctype="multipart/form-data">
+					    				{% csrf_token %}
+											<table id="products_tbl" class="display" cellspacing="0" width="100%">
+
+											 <thead>
+									          <tr>
+									              <th>Product name</th>
+									              <th>Product description</th>
+									              <th>Product tags</th>
+									              <th>Creation date</th>
+									              <th>Creation user</th>
+									              <th>Delete product</th>
+									          </tr>
+									         </thead>
+									         <tbody>
+
+											{%for product in products_list%}
+												<tr id="{{product.pk}}">
+										            <td class="product_name"> {{product.product_name}} </th>
+										            <td class="product_description"> {{product.product_description}} </th>
+										            <td class="product_tags"> {{product.product_tags}} </th>
+										            <td> {{product.creation_date}} </th>
+										            <td> {{product.user}} </th>
+										            <td> <a class="waves-effect waves-teal btn-flat delete_btn" data-id="{{product.pk}}"><i class="large material-icons">delete</i></a> </th>
+										        </tr>
+											{%endfor%}
+											</tbody>
+											</table>
+										</form>
+									</div>
+				            	</div>
+				        </div>
+				</div>
+		  	</li> 
+		  	<li>
+			    <div id="crate_products_id" class="collapsible-header"><i class="material-icons">note_add</i>Create products</div>
+			    <div class="collapsible-body">
+				    <form id="new_product" method="POST" enctype="multipart/form-data">
+				    {% csrf_token %}
+				        <input type="hidden" name="csrfmiddlewaretoken" value="R5BWuYFHwHk9qjNWy5FWgZXkU3C8lZ9MgDffPkZ0SiYig6ig8gxSoCxxLsV7EXlK">
+				        <div class="card">
+				            <div class="card-content">
+				                <div class="card-title">Add Product</div>           
+									<div class="row">
+									    <div class="input-field col s12 required" id="id_dept_no_container">
+									        <input id="product_name_id" maxlength="255" name="dept_no" type="text" required="" aria-required="true">
+									        <label for="id_dept_no">Product name</label>
+									    </div>
+									</div>
+
+									<div class="row">
+									    <div class="input-field col s12 required" id="id_dept_name_container">
+									        <input id="product_description_id" maxlength="2000" name="dept_name" type="text" required="" aria-required="true">
+									        <label for="id_dept_name">Product description</label>
+									    </div>
+									</div>
+
+									<div class="row">
+									    <div class="chips chips-placeholder col s12 required" id="id_dept_name_container">
+									        <input id="product_tags_id" maxlength="2000" name="dept_name" type="text" required="" aria-required="true">
+									    </div>
+									</div>	
+
+									<!--<div class="row">
+									    <div class="file-field input-field">
+									      <div class="btn">
+									        <span>Photo</span>
+									        <input id="file_photos_id" type="file" multiple>
+									      </div>
+									      <div class="file-path-wrapper">
+									        <input id="name_photos_id" class="file-path validate" type="text" placeholder="Upload one or more photos">
+									      </div>
+									    </div>
+									</div>-->
+
+				            	</div>
+				            <div class="card-action">
+				                <div class="right-align"> 
+				                    <!--<a id="add_product_id" class="waves-effect waves-light btn ">Add</a>-->
+				                    <a id="add_product_id" class="btn tooltipped" data-position="left" data-delay="50" data-tooltip="Recuerde diligenciar todo el formulario">Add</a>
+				                </div>
+				            </div>
+				        </div>
+				    </form>
+				</div>
+		  	</li>
+		  	<li>
+			    <div id="similar_products_id" style="display: none;" class="collapsible-header"><i class="material-icons">view_list</i>Similar Products</div>
+			    <div class="collapsible-body">
+				        <div class="card">
+				            <div class="card-content">          
+									<div id="similar_products_tbl">
+									</div>
+				            	</div>
+				        </div>
+				</div>
+		  	</li> 		   
+		</ul>
+	</div>
+</div>
+
+{%endblock%}
+
+
+{%block scripts%}
+  <script type="text/javascript" src="{% static 'productsapp/js/products.js' %}"></script>
+{%endblock%} 

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+
+{%block content%}
+
+<div id="login-page" class="row" style="width: 315px;">
+    <div class="col s12 z-depth-6 card-panel">
+      <form id="login_form_id" class="login-form" method="POST" action="{% url 'login' %}">
+      {% csrf_token %}
+        <div class="row">
+          <div class="input-field col s12 center">
+            <img src="https://www.visualstudio.com/wp-content/uploads/2016/08/VS-Products_636x350.png" alt="" class="responsive-img valign profile-image-login">
+          </div>
+        </div>
+        <div class="row margin">
+          <div class="input-field col s12">
+            <i class="material-icons prefix">perm_identity</i>
+            <input id="username_id" type="text" name="username">
+            <label for="email" data-error="wrong" data-success="right">Username</label>
+          </div>
+        </div>
+        <div class="row margin">
+          <div class="input-field col s12">
+            <i class="material-icons prefix">lock</i>
+            <input id="password_id" type="password" name="password">
+            <label for="password">Password</label>
+          </div>
+        </div>
+        <div class="row">
+          <button class="btn waves-effect waves-light col s12" type="submit" name="action">Go
+          </button>
+        </div>
+        <!--<div class="row">
+          <div class="input-field col s6 m6 l6 center-align">
+            <p class="margin medium-small"><a href="#">Via Facebook!</a></p>
+          </div>          
+        </div>-->
+
+      </form>
+    </div>
+  </div>
+
+{%endblock%}
+
+{%block scripts%}
+  <script type="text/javascript" src="{% static 'productsapp/js/login.js' %}"></script>
+{%endblock%} 
